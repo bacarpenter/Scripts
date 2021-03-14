@@ -33,20 +33,31 @@ def main():
     for i in range(len(scripts)):
         print(f"[{i}] {scripts[i].__name__}")
 
-    i = int(input("Launch: "))
+    try:
+        toLaunch = int(input("Launch: "))
+        if toLaunch > len(scripts) or toLaunch < 0:
+            raise(1)
+    except Exception:
+        # Not taking all exceptions, such as ⌃C, as user may want to exit, and I do not want to handle that here.
+        print("[bold red]Error. Invalid Script Option.[/bold red]")
+        exit(1)  # Exception 1 == Invalid Script option
+    except KeyboardInterrupt:
+        print("\nGood bye 👋")
+        exit(0)
+
     print("Wooosh... 🐢")
 
-    if isinstance(scripts[i], type(main)):
+    if isinstance(scripts[toLaunch], type(main)):
         """
         Compares type of script[i] to the know function main(). If they 
         are the same type (both functions), then run it as a function. 
         Other wise, run the main function in the external script
         """
 
-        scripts[i]()
+        scripts[toLaunch]()
 
     else:
-        scripts[i].main()
+        scripts[toLaunch].main()
 
 
 if __name__ == "__main__":
