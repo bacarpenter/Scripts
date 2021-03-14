@@ -1,13 +1,21 @@
 #!/usr/local/bin/python3
 
 from rich import print
-from os import system
+from os import system, getcwd
 
-# Import scripts
-import buildClass
-import mergePdf
-import scriptTitleBuilder
-import VHSWeekTool
+# Import scripts from pyScripts module if being run from outside directory
+if getcwd() == '/Users/bencarpenter':
+    from pyScripts import buildClass
+    from pyScripts import mergePdf
+    from pyScripts import scriptTitleBuilder
+    from pyScripts import VHSWeekTool
+
+# Other wise, do a normal import
+else:
+    import buildClass
+    import mergePdf
+    import scriptTitleBuilder
+    import VHSWeekTool
 
 # Need to make a function, as the sync notes is a shell script
 
@@ -31,7 +39,8 @@ def main():
 
     # Print script options
     for i in range(len(scripts)):
-        print(f"[{i}] {scripts[i].__name__}")
+        scriptName = scripts[i].__name__.replace("pyScripts.", "")
+        print(f"[{i}] {scriptName}")
 
     try:
         toLaunch = int(input("Launch: "))
