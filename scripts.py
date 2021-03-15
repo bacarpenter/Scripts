@@ -51,6 +51,7 @@ def main():
         print("[bold red]Error. Invalid Script Option.[/bold red]")
         exit(1)  # Exception 1 == Invalid Script option
     except KeyboardInterrupt:
+        # Handle a keyboard interrupt command, so that the stack trace doesn't get printred
         print("\nGood bye 👋")
         exit(0)
 
