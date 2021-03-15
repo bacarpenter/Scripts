@@ -3,8 +3,11 @@
 from rich import print
 from os import system, getcwd
 
+# Change to fit your needs:
+HOME = "/Users/bencarpenter"
+
 # Import scripts from pyScripts module if being run from outside directory
-if getcwd() == '/Users/bencarpenter':
+if getcwd() == HOME:
     from pyScripts import buildClass
     from pyScripts import mergePdf
     from pyScripts import scriptTitleBuilder
