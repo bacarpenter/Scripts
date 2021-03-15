@@ -1,4 +1,4 @@
-# Scripts
+# pyScripts
 
 Scripts that I use regularly on my mac!
 
