@@ -73,5 +73,15 @@ def main():
         scripts[toLaunch].main()
 
 
+def getFlag(command):
+    """
+    Return the flag for a command using the camel case convention.
+    Ex:
+    syncNotes --> -sN
+    twoWords --> -tW
+    """
+    return "TODO"
+
+
 if __name__ == "__main__":
     main()
