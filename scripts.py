@@ -42,10 +42,15 @@ def main(argv):
     if len(argv) > 1:
         for script in scripts:
             if argv[1] == script['flag']:
-                if isinstance(script['function'], type(main)):
-                    script['function']()
-                else:
-                    script['function'].main()
+                try:
+                    if isinstance(script['function'], type(main)):
+                        script['function']()
+                    else:
+                        script['function'].main()
+                except KeyboardInterrupt:
+                    print("\nGood bye 👋")
+
+                exit(0)
 
     # Welcome
     print('[bold green]Script Launcher[/bold green] | Ben Carpenter, 2021\n-------------------------------------')
@@ -69,18 +74,20 @@ def main(argv):
         exit(0)
 
     print("Wooosh... 🐢")
+    try:
+        if isinstance(scripts[toLaunch], type(main)):
+            """
+            Compares type of script[i] to the know function main(). If they 
+            are the same type (both functions), then run it as a function. 
+            Other wise, run the main function in the external script
+            """
 
-    if isinstance(scripts[toLaunch], type(main)):
-        """
-        Compares type of script[i] to the know function main(). If they 
-        are the same type (both functions), then run it as a function. 
-        Other wise, run the main function in the external script
-        """
+            scripts[toLaunch]['function']()
 
-        scripts[toLaunch]['function']()
-
-    else:
-        scripts[toLaunch]['function'].main()
+        else:
+            scripts[toLaunch]['function'].main()
+    except KeyboardInterrupt:
+        print("\nGood bye 👋")
 
 
 if __name__ == "__main__":
