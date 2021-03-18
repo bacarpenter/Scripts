@@ -2,6 +2,7 @@
 
 from rich import print
 from os import system, getcwd
+from sys import argv
 
 # Change to fit your needs:
 HOME = "/Users/bencarpenter"
@@ -28,21 +29,30 @@ def syncNotes():
 
 
 scripts = [
-    buildClass,
-    mergePdf,
-    scriptTitleBuilder,
-    VHSWeekTool,
-    syncNotes,
+    {"function": buildClass, "flag": "-bC"},
+    {"function": mergePdf, "flag": "-mP"},
+    {"function": scriptTitleBuilder, "flag": "-sTB"},
+    {"function": VHSWeekTool, "flag": "-wT"},
+    {"function": syncNotes, "flag": "-sN"},
 ]
 
 
-def main():
+def main(argv):
+
+    if len(argv) > 1:
+        for script in scripts:
+            if argv[1] == script['flag']:
+                if isinstance(script['function'], type(main)):
+                    script['function']()
+                else:
+                    script['function'].main()
+
     # Welcome
     print('[bold green]Script Launcher[/bold green] | Ben Carpenter, 2021\n-------------------------------------')
 
     # Print script options
     for i in range(len(scripts)):
-        scriptName = scripts[i].__name__.replace("pyScripts.", "")
+        scriptName = scripts[i]['function'].__name__.replace("pyScripts.", "")
         print(f"[{i}] {scriptName}")
 
     try:
@@ -67,21 +77,11 @@ def main():
         Other wise, run the main function in the external script
         """
 
-        scripts[toLaunch]()
+        scripts[toLaunch]['function']()
 
     else:
-        scripts[toLaunch].main()
-
-
-def getFlag(command):
-    """
-    Return the flag for a command using the camel case convention.
-    Ex:
-    syncNotes --> -sN
-    twoWords --> -tW
-    """
-    return "TODO"
+        scripts[toLaunch]['function'].main()
 
 
 if __name__ == "__main__":
-    main()
+    main(argv)
