@@ -1,7 +1,7 @@
 from rich import print
 
 # Change me to where you want your outputs to go.
-OUTPUT_DIR = "/Users/bencarpenter/Scripts/build-class/outputs"
+OUTPUT_DIR = "/Users/bencarpenter/pyScripts/build-class-outputs"
 
 # List of dataType shortcuts. Feel free to change!
 dataTypeShortcuts = [
